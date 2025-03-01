@@ -34,3 +34,6 @@ export const chatWithModel = async (messages) => {
     throw new Error("Erro ao chamar o modelo");
   }
 };
+
+
+
