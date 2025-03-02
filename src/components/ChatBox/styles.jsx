@@ -22,18 +22,23 @@ export const Title = styled.h1`
   text-align: center;
   color: #444;
   font-family: "Ubuntu Mono", serif;
+  font-size: 30px;
+  margin-top: 10px;
   font-weight: 700;
+  @media (min-width: 768px) {
+    font-size: 42px;
+  }
 `;
 
 export const ChatArea = styled.div`
   overflow-y: auto;
   padding: 10px;
-  margin-top: 24px;
+  margin-top: 15px;
   border: 1px solid #808080;
   border-radius: 8px;
   background: #e2f5f5;
   height: 70vh;
-  
+
   @media (min-width: 768px) {
     height: 60vh;
   }

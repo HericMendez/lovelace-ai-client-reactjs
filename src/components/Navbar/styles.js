@@ -11,15 +11,15 @@ export const NavbarContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  z-index: 1; /* Garante que a navbar fique acima da sidebar */
+  z-index: 1;
 `;
 
 export const Logo = styled.h1`
   text-align: right;
   font-size: 22px;
-img{
-  max-width: 250px;
-}
+  img {
+    max-width: 250px;
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -39,7 +39,7 @@ export const ToggleContainer = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const NavLinks = styled.ul`
   list-style: none;
@@ -49,14 +49,21 @@ export const NavLinks = styled.ul`
 
   li {
     cursor: pointer;
+
+    font-family: "Ubuntu Mono", serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 20px;
+    text-decoration: underline;
+    &:hover {
+      color: #ccc;
+    }
   }
 
   @media (max-width: 768px) {
     display: none;
   }
 `;
-
-
 
 export const Sidebar = styled.div`
   position: fixed;
@@ -79,6 +86,13 @@ export const Sidebar = styled.div`
     padding: 10px 0;
     color: white;
     cursor: pointer;
+    font-family: "Ubuntu Mono", serif;
+
+    font-weight: 700;
+    font-size: 20px;
+    &:hover {
+      color: #ccc;
+    }
   }
 `;
 
@@ -86,11 +100,11 @@ export const CloseButton = styled.button`
   background: none;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 36px;
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  left: 20px;
 
   @media (min-width: 769px) {
     display: none;

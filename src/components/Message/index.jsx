@@ -1,19 +1,23 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
+import { formatHtmlContent } from "../../utils/formatHtmlContent";
 
 const MessageWrapper = styled.div`
   padding: 10px;
   margin: 5px 0;
   border-radius: 6px;
-  background-color: ${({ sender }) => (sender === "Você" ? "#d1c4e9" : "#e0f7fa")};
+  background-color: ${({ sender }) =>
+    sender === "Você" ? "#d1c4e9" : "#e0f7fa"};
   text-align: ${({ sender }) => (sender === "Você" ? "right" : "left")};
 `;
 
 const Message = ({ sender, text }) => (
   <MessageWrapper sender={sender}>
     <strong>{sender}:</strong>
-    <div dangerouslySetInnerHTML={{ __html: text }} />
+    {/*     <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />
 
+ */}
+    <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />{" "}
   </MessageWrapper>
 );
 

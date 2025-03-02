@@ -10,11 +10,18 @@ export const Container = styled.div`
   box-shadow: 0 1px 2px #0003;
   background-color: white;
   border-radius: 5px;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     flex-direction: row;
-    gap: 10px;  } 
+    gap: 10px;
+  }
 `;
-
+export const Title = styled.h1`
+  text-align: center;
+  color: #444;
+  font-family: "Ubuntu Mono", serif;
+  font-size: 42px;
+  font-weight: 700;
+`;
 export const Content = styled.div`
   gap: 15px;
   display: flex;
@@ -22,10 +29,7 @@ export const Content = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-
-    
   padding: 20px;
-
 `;
 
 export const Label = styled.label`
@@ -33,7 +37,7 @@ export const Label = styled.label`
   font-weight: 600;
   color: #676767;
 
-  img{
+  img {
     width: 350px;
     border-radius: 10px;
     margin: 20px;

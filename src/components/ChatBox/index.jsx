@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Message from "../Message";
 import {
   Button,
@@ -8,17 +9,13 @@ import {
   InputArea,
   Title,
 } from "./styles";
-import { useLocation } from "react-router-dom";
-import { chatWithModel } from "../../services/chatService"; // Função que integra com o LangChain
-import { formatHtmlContent } from "../../utils/formatHtmlContent"; // Formatação do HTML, se necessário
-
-const ChatBox = () => {
+import axios from "axios";
+import { API_BASE_URL } from "../../config";
+const ChatBox = ({ user, model }) => {
   const [messages, setMessages] = useState([]);
+  console.log("messages ==> ", messages);
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const { state } = useLocation();
-
-
 
   const handleSend = async () => {
     if (!userInput.trim()) return;
@@ -33,17 +30,14 @@ const ChatBox = () => {
     setIsTyping(true);
 
     try {
-      // Chama a função que agora usa o LangChain para lidar com o modelo
-      const response = await chatWithModel(newMessages);
+      const { data } = await axios.post(`${API_BASE_URL}/chat/${model}`, {
+        messages: newMessages,
+      });
+      console.log("response from server ==>", data);
 
-      // Formata a resposta, se necessário
-      const formattedHtml = formatHtmlContent(response);
-      console.log("formattedHtml ==> ", formattedHtml);
-
-      // Atualiza a conversa com a resposta do modelo
       setMessages([
         ...newMessages,
-        { sender: "Ada", role: "assistant", content: formattedHtml },
+        { sender: "Ada", role: "assistant", content: data.response },
       ]);
     } catch (error) {
       console.error("Erro ao comunicar com o modelo:", error);
@@ -58,10 +52,13 @@ const ChatBox = () => {
 
   return (
     <ChatContainer>
-      <Title>💡Modelo {state?.model}💡</Title>
+      <Title>💡Modelo {model}💡</Title>
 
       <ChatArea>
-      <Message  sender="Ada" text={`Olá ${state?.user}, meu nome é Ada Lovelace, mas pode me chamar de Ada! O que vamos aprender hoje? `} />
+        <Message
+          sender="Ada"
+          text={`Olá ${user}, meu nome é Ada Lovelace, mas pode me chamar de Ada! O que vamos aprender hoje? `}
+        />
         {messages.map((msg, index) => (
           <Message key={index} sender={msg.sender} text={msg.content} />
         ))}
