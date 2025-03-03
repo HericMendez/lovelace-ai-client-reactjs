@@ -15,7 +15,7 @@ const Message = ({ sender, text }) => {
   console.log("text is array?", Array.isArray(text));
   return (
     <MessageWrapper sender={sender}>
-      <strong>{sender}:</strong>
+      <strong>{sender ? sender : "Ada"}:</strong>
 
       <div>
         {Array.isArray(text) ? (

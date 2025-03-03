@@ -34,4 +34,8 @@ Repository and instructions: [lovelace-ai-server](https://github.com/HericMendez
    npm install
    npm start
     ```
-
+3. **Install dependencies and start the application:**
+   ```bash
+   npm install
+   npm start
+    ```

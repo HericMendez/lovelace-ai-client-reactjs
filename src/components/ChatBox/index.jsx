@@ -16,7 +16,19 @@ const ChatBox = ({ user, model }) => {
 
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-
+  function filterDuplicateUserMessages(messages) {
+    return messages.reduce((filtered, current, index, arr) => {
+      // Se não for um 'user' ou se for o último 'user' seguido de outro 'user', adiciona ao resultado
+      if (
+        current.role !== "user" ||
+        index === arr.length - 1 ||
+        arr[index + 1].role !== "user"
+      ) {
+        filtered.push(current);
+      }
+      return filtered;
+    }, []);
+  }
   const handleSend = async () => {
     if (!userInput.trim()) return;
     console.log("userInput ==> ", userInput);
@@ -25,19 +37,24 @@ const ChatBox = ({ user, model }) => {
       ...messages,
       { role: "user", sender: "Você", content: userInput },
     ];
-    setMessages(newMessages);
+    const filteredDuplicatedMessages = filterDuplicateUserMessages(newMessages);
+
+    setMessages(filteredDuplicatedMessages);
     setUserInput("");
-    console.log("newMessages=>>", newMessages);
+    console.log(
+      "filteredDuplicatedMessages=>>",
+      filterDuplicateUserMessages(filteredDuplicatedMessages)
+    );
     setIsTyping(true);
 
     try {
       const { data } = await axios.post(`${API_BASE_URL}/chat/${model}`, {
-        messages: newMessages,
+        messages: filteredDuplicatedMessages,
       });
       console.log("response from server ==>", data);
 
       setMessages([
-        ...newMessages,
+        ...filteredDuplicatedMessages,
         ...(Array.isArray(data.response)
           ? data.response
           : [{ sender: "Ada", role: "assistant", content: data.response }]),
@@ -45,7 +62,7 @@ const ChatBox = ({ user, model }) => {
     } catch (error) {
       console.error("Erro ao comunicar com o modelo:", error);
       setMessages([
-        ...newMessages,
+        ...filteredDuplicatedMessages,
         { sender: "Ada", content: "Ocorreu um erro. Tente novamente." },
       ]);
     }
