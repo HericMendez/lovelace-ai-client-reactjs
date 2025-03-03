@@ -29,15 +29,13 @@ const Navbar = () => {
               Github
             </a>
           </li>
-          <li onClick={() => navigate("/")}>Voltar</li>
+          <li onClick={() => navigate("/")}>AI Models</li>
         </NavLinks>
       </NavbarContainer>
 
       <Sidebar isOpen={isOpen}>
         <CloseButton onClick={() => [setIsOpen(!isOpen)]}>×</CloseButton>
         <ul>
-          <li onClick={() => [setIsOpen(!isOpen), navigate("/docs")]}>Docs</li>
-          <hr />
           <li>
             {" "}
             <a href="https://github.com/HericMendez/lovelace-ai-client-reactjs">
@@ -45,9 +43,12 @@ const Navbar = () => {
             </a>
           </li>
           <hr />
-          <li onClick={() => [setIsOpen(!isOpen), navigate("/")]}>
-            Voltar
-          </li>{" "}
+          <li onClick={() => [setIsOpen(!isOpen), navigate("/docs")]}>Docs</li>
+          <hr />
+          <li onClick={() => [setIsOpen(!isOpen), navigate("/")]}>AI Models</li>
+          <hr />
+          <hr />
+
           <hr />
         </ul>
       </Sidebar>

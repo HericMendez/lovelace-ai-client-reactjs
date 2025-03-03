@@ -47,7 +47,7 @@ export const NavLinks = styled.ul`
   list-style: none;
   display: flex;
   gap: 20px;
-  margin: 0;
+  margin: 0 30px;
 
   li {
     cursor: pointer;
