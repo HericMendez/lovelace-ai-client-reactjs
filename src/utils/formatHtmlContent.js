@@ -1,6 +1,4 @@
 export const formatHtmlContent = (text) => {
-  console.log("text received from formatHtmlContent function ==> ", text);
-
   let formattedText = text;
 
   // Remove os tokens "AI:" e "Human:" independentemente da posição

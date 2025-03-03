@@ -13,12 +13,13 @@ import axios from "axios";
 import { API_BASE_URL } from "../../config";
 const ChatBox = ({ user, model }) => {
   const [messages, setMessages] = useState([]);
-  console.log("messages ==> ", messages);
+
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
   const handleSend = async () => {
     if (!userInput.trim()) return;
+    console.log("userInput ==> ", userInput);
 
     const newMessages = [
       ...messages,
@@ -26,7 +27,7 @@ const ChatBox = ({ user, model }) => {
     ];
     setMessages(newMessages);
     setUserInput("");
-
+    console.log("newMessages=>>", newMessages);
     setIsTyping(true);
 
     try {
@@ -37,8 +38,10 @@ const ChatBox = ({ user, model }) => {
 
       setMessages([
         ...newMessages,
-        { sender: "Ada", role: "assistant", content: data.response },
-      ]);
+        ...(Array.isArray(data.response)
+          ? data.response
+          : [{ sender: "Ada", role: "assistant", content: data.response }]),
+      ]); //chain and graph models use different data types, this decision structure fixes it
     } catch (error) {
       console.error("Erro ao comunicar com o modelo:", error);
       setMessages([
@@ -58,7 +61,8 @@ const ChatBox = ({ user, model }) => {
         <Message
           sender="Ada"
           text={`Olá ${user}, meu nome é Ada Lovelace, mas pode me chamar de Ada! O que vamos aprender hoje? `}
-        />
+        />{" "}
+        {/* hard-coded greeting message */}
         {messages.map((msg, index) => (
           <Message key={index} sender={msg.sender} text={msg.content} />
         ))}

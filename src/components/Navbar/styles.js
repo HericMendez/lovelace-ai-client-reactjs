@@ -3,15 +3,17 @@ import styled from "styled-components";
 export const NavbarContainer = styled.nav`
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  width: 100vw;
   height: 60px;
-  background: #253340;
+  background: #111;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
   z-index: 1;
+  position: fixed;
 `;
 
 export const Logo = styled.h1`
@@ -52,11 +54,18 @@ export const NavLinks = styled.ul`
 
     font-family: "Ubuntu Mono", serif;
     font-weight: 700;
+
     font-size: 18px;
     margin-left: 20px;
     text-decoration: underline;
     &:hover {
       color: #ccc;
+    }
+    a {
+      color: #fff !important;
+      &:hover {
+        color: #ccc !important;
+      }
     }
   }
 

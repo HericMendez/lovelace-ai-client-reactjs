@@ -22,22 +22,28 @@ const Navbar = () => {
           <img src={NavLogo} alt="" />
         </Logo>
         <NavLinks>
-          <li></li>
-          <li>Docs</li>
-          <li>Sobre</li>
-          <li>Github</li>
+          <li onClick={() => navigate("/docs")}>Docs</li>
+
+          <li>
+            <a href="https://github.com/HericMendez/lovelace-ai-client-reactjs">
+              Github
+            </a>
+          </li>
           <li onClick={() => navigate("/")}>Voltar</li>
         </NavLinks>
       </NavbarContainer>
 
       <Sidebar isOpen={isOpen}>
-        <CloseButton onClick={() => setIsOpen(!isOpen)}>×</CloseButton>
+        <CloseButton onClick={() => [setIsOpen(!isOpen)]}>×</CloseButton>
         <ul>
-          <li onClick={() => setIsOpen(!isOpen)}>Docs</li>
+          <li onClick={() => [setIsOpen(!isOpen), navigate("/docs")]}>Docs</li>
           <hr />
-          <li onClick={() => setIsOpen(!isOpen)}>Sobre</li>
-          <hr />
-          <li onClick={() => setIsOpen(!isOpen)}>Github</li>
+          <li>
+            {" "}
+            <a href="https://github.com/HericMendez/lovelace-ai-client-reactjs">
+              Github
+            </a>
+          </li>
           <hr />
           <li onClick={() => [setIsOpen(!isOpen), navigate("/")]}>
             Voltar

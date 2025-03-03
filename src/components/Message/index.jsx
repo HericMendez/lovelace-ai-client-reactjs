@@ -11,14 +11,27 @@ const MessageWrapper = styled.div`
   text-align: ${({ sender }) => (sender === "Você" ? "right" : "left")};
 `;
 
-const Message = ({ sender, text }) => (
-  <MessageWrapper sender={sender}>
-    <strong>{sender}:</strong>
-    {/*     <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />
+const Message = ({ sender, text }) => {
+  console.log("text is array?", Array.isArray(text));
+  return (
+    <MessageWrapper sender={sender}>
+      <strong>{sender}:</strong>
 
- */}
-    <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />{" "}
-  </MessageWrapper>
-);
+      <div>
+        {Array.isArray(text) ? (
+          text.map((item, index) => (
+            <div
+              key={index}
+              dangerouslySetInnerHTML={{ __html: item.content }}
+            />
+          ))
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />
+        )}{" "}
+        {/* this decision structure avoids data duplication  */}
+      </div>
+    </MessageWrapper>
+  );
+};
 
 export default Message;

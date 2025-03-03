@@ -15,15 +15,16 @@ import { createGlobalStyle } from "styled-components";
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-x: hidden;
   }
   .math {
-  font-family: 'Times New Roman', Times, serif; /* Fonte clássica para conteúdos matemáticos */
-  font-style: italic;        /* Estiliza as expressões com itálico */
-  font-size: 1.1em;          /* Tamanho ligeiramente maior, ajuste conforme necessário */
-  color: #333;               /* Cor do texto */
-  background-color: #f0f0f0; /* Fundo claro para destacar a expressão */
-  padding: 0.2em 0.4em;      /* Espaçamento interno para melhor legibilidade */
-  border-radius: 0.3em;      /* Bordas suavizadas */
+  font-family: 'Times New Roman', Times, serif; 
+  font-style: italic;        
+  font-size: 1.1em;          
+  color: #333;             
+  background-color: #f0f0f0; 
+  padding: 0.2em 0.4em;      
+  border-radius: 0.3em;  
 }
 .math-block {
   display: flex;
@@ -46,7 +47,17 @@ import { createGlobalStyle } from "styled-components";
   padding: 2px 0;
   white-space: nowrap;
 }
-
+.code-block {
+  background-color: #222;
+  width: 80%;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 16px;
+  margin: 10px 0;
+  color: #fff;
+  font-family: "Ubuntu Mono", serif;
+}
 `;
 
 export default GlobalStyles

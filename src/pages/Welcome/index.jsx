@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import * as C from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo_full.png";
+
 const WelcomePage = () => {
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ const WelcomePage = () => {
       return;
     }
 
-    navigate("/home", { state: { user: user, model: e.target.id } });
+    navigate("/chat", { state: { user: user, model: e.target.id } });
   };
 
   return (
@@ -40,16 +41,16 @@ const WelcomePage = () => {
 
         <C.labelError>{error}</C.labelError>
 
-        <Button id="langChain" Text="Chatbot LangChain" onClick={handleLogin} />
+        <Button id="langChain" Text="Modelo LangChain" onClick={handleLogin} />
         <Button
           id="langGraph"
-          Text="Chatbot LangGraph"
+          Text="Modelo LangGraph"
           Color={"#28a745"}
           onClick={handleLogin}
         />
-        {/*         <C.Strong>
-          <Link to="/signup">&nbsp;Qual é a diferença?</Link>
-        </C.Strong> */}
+                <C.Strong>
+          <Link to="/models">&nbsp;Qual é a diferença?</Link>
+        </C.Strong>
       </C.Content>
     </C.Container>
   );

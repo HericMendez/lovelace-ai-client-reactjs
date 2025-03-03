@@ -8,7 +8,6 @@ export const Input = styled.input`
   font-size: 20px;
   flex: 1;
   font-family: "Ubuntu Mono", serif;
-
   border: 1px solid #808080;
   border-radius: 4px;
   min-height: 60px;
