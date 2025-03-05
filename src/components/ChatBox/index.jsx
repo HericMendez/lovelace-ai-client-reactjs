@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import Message from "../Message";
+import { ThreeDot } from "react-loading-indicators";
 import {
   Button,
   ChatArea,
@@ -18,7 +19,7 @@ const ChatBox = ({ user, model }) => {
   const [isTyping, setIsTyping] = useState(false);
   function filterDuplicateUserMessages(messages) {
     return messages.reduce((filtered, current, index, arr) => {
-      // Se não for um 'user' ou se for o último 'user' seguido de outro 'user', adiciona ao resultado
+      // this function filters duplicated messages
       if (
         current.role !== "user" ||
         index === arr.length - 1 ||
@@ -34,8 +35,12 @@ const ChatBox = ({ user, model }) => {
     console.log("userInput ==> ", userInput);
 
     const newMessages = [
-      ...messages,
-      { role: "user", sender: "Você", content: userInput },
+      ...filterDuplicateUserMessages(messages),
+      {
+        role: "user",
+        sender: "Você",
+        content: userInput,
+      },
     ];
     const filteredDuplicatedMessages = filterDuplicateUserMessages(newMessages);
 
@@ -57,7 +62,13 @@ const ChatBox = ({ user, model }) => {
         ...filteredDuplicatedMessages,
         ...(Array.isArray(data.response)
           ? data.response
-          : [{ sender: "Ada", role: "assistant", content: data.response }]),
+          : [
+              {
+                sender: "Ada",
+                role: "assistant",
+                content: data.response,
+              },
+            ]),
       ]); //chain and graph models use different data types, this decision structure fixes it
     } catch (error) {
       console.error("Erro ao comunicar com o modelo:", error);
@@ -83,7 +94,17 @@ const ChatBox = ({ user, model }) => {
         {messages.map((msg, index) => (
           <Message key={index} sender={msg.sender} text={msg.content} />
         ))}
-        {isTyping && <Message sender="Ada" text="Ada está digitando..." />}
+        {isTyping && (
+          <>
+            <ThreeDot
+              variant="bounce"
+              color="#d1c4e9"
+              size="small"
+              text=""
+              textColor=""
+            />{" "}
+          </>
+        )}
       </ChatArea>
       <InputArea>
         <TextArea

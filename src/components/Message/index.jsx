@@ -28,7 +28,7 @@ const Message = ({ sender, text }) => {
         ) : (
           <div dangerouslySetInnerHTML={{ __html: formatHtmlContent(text) }} />
         )}{" "}
-        {/* this decision structure avoids data duplication  */}
+        {/* this decision structure avoids code breaking due to wrong data types */}
       </div>
     </MessageWrapper>
   );
